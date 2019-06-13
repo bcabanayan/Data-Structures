@@ -40,4 +40,19 @@ class BinarySearchTree:
     
 
   def for_each(self, cb):
-    pass
+    # run cb on self
+    # check if left node
+    # run cb
+    # check if right node
+    # run cb
+    # recursively run function on left and right nodes, if found
+    # return cb
+    if self.value:
+      cb(self.value)
+    if self.right:
+      self.right.for_each(cb)
+    if self.left:
+      self.left.for_each(cb)
+    cb(self.value)
+    
+    
