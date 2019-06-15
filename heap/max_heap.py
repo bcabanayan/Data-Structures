@@ -10,7 +10,15 @@ class Heap:
 
 
   def delete(self):
-    pass
+    # store reference to first heap element
+    max_val = self.storage[0]
+    # set value of first heap element to the value of last heap element
+    self.storage[0] = self.storage[len(self.storage) - 1]
+    # pop to remove last heap element
+    self.storage.pop()
+    # check the two children...
+    # return the top most element
+    return max_val
 
   def get_max(self):
     pass
