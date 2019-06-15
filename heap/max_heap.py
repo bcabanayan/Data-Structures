@@ -16,8 +16,9 @@ class Heap:
     self.storage[0] = self.storage[len(self.storage) - 1]
     # pop to remove last heap element
     self.storage.pop()
-    # check the two children...
-    # return the top most element
+    # sift down the new top element 
+
+    # return the top most element that was removed
     return max_val
 
   def get_max(self):
@@ -42,4 +43,34 @@ class Heap:
         break
 
   def _sift_down(self, index):
-    pass
+    # use heap formulas to determine children indices
+    left_child_index = 2 * index + 1
+    right_child_index = 2 * index + 2
+    # check if left child exists
+    if len(self.storage) < (left_child_index + 1):
+      return
+    # left child exists...
+    elif len(self.storage) < (left_child_index + 2):
+      # ....so, check if item at index is less than left child
+      if self.storage[index] < self.storage[left_child_index]:
+        # swap item at index and left child
+        self.storage[index], self.storage[left_child_index] = self.storage[left_child_index], self.storage[index]
+        # recursively sift down element that was swapped into left child index
+        self._sift_down(left_child_index)
+      # if item at index is greater than left child, then no more swaps needed
+      else:
+        return
+    # both right and left children exist
+    else:
+      # if item at index is lower than either left child or right child
+      if self.storage[index] < self.storage[left_child_index] or self.storage[index] < self.storage[right_child_index]:
+        # if left child is greater than right child
+        if self.storage[left_child_index] > self.storage[right_child_index]:
+          # swap item at index and left child
+          self.storage[index], self.storage[left_child_index] = self.storage[left_child_index], self.storage[index]
+          # recursively sift down element that was swapped into left child index
+          self._sift_down(left_child_index)
+        else:
+          self.storage[index], self.storage[right_child_index] = self.storage[right_child_index], self.storage[index]
+          # recursively sift down element that was swapped into left child index
+          self._sift_down(right_child_index)      
