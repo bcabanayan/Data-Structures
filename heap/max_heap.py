@@ -21,10 +21,10 @@ class Heap:
     return max_val
 
   def get_max(self):
-    pass
+    return self.storage[0]
 
   def get_size(self):
-    pass
+    return len(self.storage)
 
   def _bubble_up(self, index):
     # while at least one child node exists....(meaning there's a parent node)
