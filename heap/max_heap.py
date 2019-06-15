@@ -17,7 +17,7 @@ class Heap:
     # pop to remove last heap element
     self.storage.pop()
     # sift down the new top element 
-
+    self._sift_down(0)
     # return the top most element that was removed
     return max_val
 
@@ -71,6 +71,7 @@ class Heap:
           # recursively sift down element that was swapped into left child index
           self._sift_down(left_child_index)
         else:
+          # right child is larger than left child, so swap parent with right child
           self.storage[index], self.storage[right_child_index] = self.storage[right_child_index], self.storage[index]
           # recursively sift down element that was swapped into left child index
           self._sift_down(right_child_index)      
