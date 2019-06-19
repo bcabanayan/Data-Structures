@@ -55,22 +55,108 @@ class DoublyLinkedList:
     self.length += 1
 
   def remove_from_head(self):
-    pass
+    # MY OWN CODE!
+    # if self.length == 0:
+    #   pass
+    # elif self.length == 1:
+    #   curr_head = self.head
+    #   self.head = None
+    #   self.tail = None
+    #   self.length -= 1
+    #   return curr_head.value
+    # elif self.length > 1:
+    #   curr_head = self.head
+    #   self.head = curr_head.next
+    #   curr_head.delete()
+    #   self.length -= 1
+    #   return curr_head.value
+    # IN CLASS CODE!
+    removed = self.head.value
+    if self.head == self.tail:
+      self.head = None
+      self.tail = None
+      self.length = 0
+    else:
+      self.head = self.head.next
+      self.head.prev.delete()
+      self.length -= 1
+    return removed
+
 
   def add_to_tail(self, value):
-    pass
+    if self.tail:
+      curr_tail = self.tail
+      self.tail.insert_after(value)
+      self.tail = ListNode(value, curr_tail, None)
+    else:
+      new_tail = ListNode(value, None, None) 
+      self.head = new_tail
+      self.tail = new_tail
+    self.length += 1
 
   def remove_from_tail(self):
-    pass
+    removed = self.tail.value
+    if self.head == self.tail:
+      self.tail = None
+      self.head = None
+      self.length = 0
+    else:
+      self.tail = self.tail.prev
+      self.tail.next.delete()
+      self.length -= 1
+    return removed
 
   def move_to_front(self, node):
-    pass
+    if node == self.head:
+      pass
+    # USING BUILT IN NODE METHOD TO DELETE
+    # elif node == self.tail:
+    #   self.remove_from_tail()
+    # # add moving node to head
+    # else:
+    #   node.delete()
+    #   self.length -= 1
+    # USING BUILT IN LIST METHOD TO DELETE
+    else:
+      self.delete(node)
+    self.add_to_head(node.value)
 
   def move_to_end(self, node):
-    pass
+    if node == self.tail:
+      pass
+    # USING BUILT IN NODE METHOD TO DELETE
+    # elif node == self.head:
+    #   self.remove_from_head()
+    # else:
+    #   node.delete()
+    #   self.length -= 1
+    # self.add_to_tail(node.value)
+    # USING BUILT IN LIST METHOD TO DELETE
+    else:
+      self.delete(node)
+    self.add_to_tail(node.value)
+      
 
   def delete(self, node):
-    pass
+    if self.head == self.tail:
+      self.head = None
+      self.tail = None
+      self.length -= 1
+    elif self.head == node:
+      self.remove_from_head()
+    elif self.tail == node:
+      self.remove_from_tail()
+    else:
+      node.delete()
+      self.length -= 1
     
   def get_max(self):
-    pass
+    if self.head == self.tail:
+      return self.head.value
+    cur_node = self.head
+    max_value = cur_node.value
+    while cur_node is not None:
+      if cur_node.value > max_value:
+        max_value = cur_node.value
+      cur_node = cur_node.next
+    return max_value
